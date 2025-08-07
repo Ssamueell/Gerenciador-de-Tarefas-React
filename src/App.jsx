@@ -6,8 +6,10 @@ import { v4 } from "uuid";
 import Title from "./components/Title";
 
 function App() {
-  let [tasks, setTasks] =
-    useState(JSON.parse(localStorage.getItem("tasks"))) || [];
+  const [tasks, setTasks] = useState(() => {
+    const stored = localStorage.getItem("tasks");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
